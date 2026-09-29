@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oak Ledger</title>
+  <meta name="description" content="A writing room that turns over every hour." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="mast">
+    <a class="mark" href="#hour">
+      <span class="mark-dot"></span>
+      Oak Ledger
+    </a>
+    <nav>
+      <button data-go="hour">This hour</button>
+      <button data-go="gallery">Public floor</button>
+      <button data-go="desk">Desk</button>
+    </nav>
+    <div class="auth-slot" id="authSlot"></div>
+  </header>
+
+  <main>
+    <section id="hour" class="panel hour">
+      <p class="kicker"><span id="clock">—</span> · edition</p>
+      <h1 id="headline">The room is gathering.</h1>
+      <p class="essay" id="essay">Every hour the ledger is rewritten. Stay a minute. The paper still smells like the last rewrite.</p>
+      <article class="featured" id="featured" hidden>
+        <p class="kicker">lifted from the floor</p>
+        <h2 id="featTitle"></h2>
+        <p class="by" id="featBy"></p>
+        <div class="body" id="featBody"></div>
+      </article>
+    </section>
+
+    <section id="gallery" class="panel">
+      <div class="sec-head">
+        <h2>Public floor</h2>
+        <p>Anything a writer marks public lands here. Nothing else.</p>
+      </div>
+      <div class="grid" id="galleryGrid"></div>
+    </section>
+
+    <section id="desk" class="panel desk">
+      <div class="sec-head">
+        <h2>Your desk</h2>
+        <p>Sign in to keep a drawer. Public notes walk downstairs on their own.</p>
+      </div>
+      <div id="deskAuth"></div>
+      <form id="noteForm" class="note-form" hidden>
+        <label>
+          Title
+          <input name="title" maxlength="140" required placeholder="A working title" />
+        </label>
+        <label>
+          Body
+          <textarea name="body" required maxlength="12000" rows="8" placeholder="Write like nobody is watching, then decide."></textarea>
+        </label>
+        <label class="check">
+          <input type="checkbox" name="is_public" />
+          Mark public — show on the floor
+        </label>
+        <button type="submit" class="solid">Save to the drawer</button>
+      </form>
+      <div class="mine" id="mine"></div>
+    </section>
+  </main>
+
+  <div class="modal" id="authModal" hidden>
+    <div class="sheet">
+      <button class="x" id="closeAuth" type="button">Close</button>
+      <h3>Sign in</h3>
+      <p>We’ll email you a one-time link. No password to remember.</p>
+      <form id="magicForm">
+        <input type="email" name="email" required placeholder="you@somewhere.com" />
+        <button class="solid" type="submit">Send the link</button>
+      </form>
+      <p class="hint" id="magicHint"></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
